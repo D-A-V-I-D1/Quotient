@@ -53,6 +53,11 @@ struct PairsView: View {
                         Panel(title: "Cumulative P&L") { pnlChart(r) }
                     }
                     Panel(title: "What this shows") {
+                        if let r = result {
+                            PlainText(text: PlainEnglish.pairsSummary(r, parameters: params,
+                                                                       monteCarlo: mcSummary.map { (mean: $0.mean, tStatistic: $0.t, trials: $0.n) }))
+                            Divider().overlay(Theme.hairline)
+                        }
                         Text("A rolling-OLS hedge ratio and z-score band rule. When the spread truly mean-reverts the rule is profitable across seeds; when it is a random walk it is not — the negative control is what separates a real effect from an in-sample artifact. A first version of this code accrued P&L on the re-fitted residual and passed the positive test while failing the control; the fix locks β at entry (see PairsTrading.swift).")
                             .font(.system(size: 11)).foregroundStyle(Theme.inkMuted)
                     }
@@ -63,6 +68,7 @@ struct PairsView: View {
             .navigationTitle("Pairs")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Theme.background, for: .navigationBar)
+            .toolbar { ToolbarItem(placement: .topBarTrailing) { GlossaryButton() } }
         }
         .onAppear { if result == nil { runOne() } }
         .onChange(of: meanReverting) { runOne() }

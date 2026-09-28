@@ -57,7 +57,11 @@ final class TerminalViewModel {
     private(set) var recentFills: [MarketMakerFill] = []
     private(set) var makerQuotes: (bid: Ticks?, ask: Ticks?) = (nil, nil)
     private(set) var meanMarkout50: Double?
+    private(set) var liveSummary: String = ""
     private(set) var version = 0
+
+    /// Steps back to compare the quoted spread against for the live summary.
+    private let spreadLookbackSteps = 150
 
     var instrument: Instrument { parameters.instrument }
 
@@ -162,6 +166,16 @@ final class TerminalViewModel {
         recentFills = Array(simulator.fills.suffix(8).reversed())
         let m = r.markouts(horizon: 50)
         meanMarkout50 = m.isEmpty ? nil : m.reduce(0, +) / Double(m.count)
+        let spreads = r.quotedSpreadTicks
+        let earlierIdx = max(0, spreads.count - 1 - spreadLookbackSteps)
+        liveSummary = PlainEnglish.liveSummary(PlainEnglish.LiveState(
+            symbol: instrument.symbol, inventoryLots: simulator.inventory, sharesPerLot: instrument.lotSize,
+            pnlDollars: simulator.pnlDollars, fills: simulator.fills.count,
+            informedFills: simulator.fills.filter { $0.counterparty == .informedTrader }.count,
+            quotedSpreadTicks: spreads.last.flatMap { $0 }.map(Int.init),
+            earlierQuotedSpreadTicks: spreads.isEmpty ? nil : spreads[earlierIdx].map(Int.init),
+            sigmaEstimate: simulator.volatility.sigma, sigmaPrior: parameters.fundamentalVolatilityTicks,
+            isFinished: simulator.isFinished, step: simulator.step))
         version &+= 1
     }
 

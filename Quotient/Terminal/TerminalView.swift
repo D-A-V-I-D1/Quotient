@@ -25,6 +25,7 @@ struct TerminalView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Theme.background, for: .navigationBar)
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) { GlossaryButton() }
                 ToolbarItem(placement: .principal) {
                     HStack(spacing: 8) {
                         Image("Quotient-icon")
@@ -67,6 +68,10 @@ private struct TerminalContent: View {
                     makerQuoteLine
                 }
                 tiles
+                Panel(title: "In plain English") {
+                    PlainText(text: vm.liveSummary)
+                        .frame(minHeight: 54, alignment: .topLeading) // fixed floor so the panel doesn't re-flow while running
+                }
                 charts
                 controls
                 if vm.strategyChoice == .manual { manualControls }

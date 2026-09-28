@@ -48,6 +48,21 @@ public struct PerformanceMetrics: Sendable, Equatable {
     public let spreadCapturePnL: Double
     public let inventoryPnL: Double
 
+    /// Direct initialiser for tests and previews that need a specific shape
+    /// of result without running a simulation.
+    init(strategyName: String, seed: UInt64 = 0, finalPnL: Double, sessionSharpe: Double, maxDrawdown: Double,
+         rmsInventory: Double, maxAbsInventory: Int, finalInventory: Int, fillCount: Int, volume: Int,
+         makerFillRatio: Double = 1, meanCaptureTicks: Double, meanQuotedSpreadTicks: Double, twoSidedFraction: Double = 1,
+         meanMarkoutTicks: [Int: Double], meanMarkoutVsInformedTicks: [Int: Double], meanMarkoutVsNoiseTicks: [Int: Double],
+         spreadCapturePnL: Double, inventoryPnL: Double) {
+        self.strategyName = strategyName; self.seed = seed; self.finalPnL = finalPnL; self.sessionSharpe = sessionSharpe
+        self.maxDrawdown = maxDrawdown; self.rmsInventory = rmsInventory; self.maxAbsInventory = maxAbsInventory
+        self.finalInventory = finalInventory; self.fillCount = fillCount; self.volume = volume; self.makerFillRatio = makerFillRatio
+        self.meanCaptureTicks = meanCaptureTicks; self.meanQuotedSpreadTicks = meanQuotedSpreadTicks; self.twoSidedFraction = twoSidedFraction
+        self.meanMarkoutTicks = meanMarkoutTicks; self.meanMarkoutVsInformedTicks = meanMarkoutVsInformedTicks
+        self.meanMarkoutVsNoiseTicks = meanMarkoutVsNoiseTicks; self.spreadCapturePnL = spreadCapturePnL; self.inventoryPnL = inventoryPnL
+    }
+
     public init(result r: SimulationResult) {
         strategyName = r.strategyName
         seed = r.seed

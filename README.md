@@ -101,6 +101,15 @@ tab runs the paired Monte Carlo on device and can share the Markdown report.
 The Market tab shows the snapshot the simulation is calibrated from and lets
 you pick the instrument.
 
+## Plain-English layer
+
+Compare, Pairs and Terminal can explain their results in prose for readers
+without a quant background, with a Plain English / Technical toggle on the
+Compare screen and an ⓘ glossary on each screen. The prose is generated in
+`QuotientCore` from the same result structs the technical grid displays, so it
+can never disagree with the numbers. How it works and how to extend it:
+[`docs/PLAIN_ENGLISH.md`](docs/PLAIN_ENGLISH.md).
+
 ## Design notes worth reading
 
 - [`OrderBook.swift`](QuotientCore/Sources/QuotientCore/OrderBook/OrderBook.swift):

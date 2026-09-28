@@ -10,9 +10,21 @@ import SwiftUI
 import Charts
 import QuotientCore
 
+/// Presentation mode for results. Plain English is the default because
+/// first-time viewers are the larger audience; the technical grid is one tap away.
+enum ResultsMode: String, CaseIterable, Identifiable {
+    case plain = "Plain English"
+    case technical = "Technical"
+    var id: String { rawValue }
+}
+
 struct CompareView: View {
     @Environment(AppModel.self) private var app
     @State private var vm = CompareViewModel()
+    @AppStorage("resultsMode") private var modeRaw: String = ResultsMode.plain.rawValue
+    private var mode: Binding<ResultsMode> {
+        Binding(get: { ResultsMode(rawValue: modeRaw) ?? .plain }, set: { modeRaw = $0.rawValue })
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,7 +33,11 @@ struct CompareView: View {
                     setup
                     if vm.isRunning { runningPanel }
                     if let report = vm.report {
-                        ResultsSection(report: report, summary: vm.lastRunSummary, markdown: vm.markdown)
+                        Picker("View", selection: mode) {
+                            ForEach(ResultsMode.allCases) { Text($0.rawValue).tag($0) }
+                        }
+                        .pickerStyle(.segmented)
+                        ResultsSection(report: report, summary: vm.lastRunSummary, markdown: vm.markdown, mode: mode.wrappedValue)
                     } else if !vm.isRunning {
                         Panel {
                             Text("Runs every strategy on identical seeded markets (common random numbers) and tests the paired differences. Expect 100 trials × 3,000 steps to take a few seconds on device.")
@@ -35,6 +51,7 @@ struct CompareView: View {
             .navigationTitle("Compare")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Theme.background, for: .navigationBar)
+            .toolbar { ToolbarItem(placement: .topBarTrailing) { GlossaryButton() } }
         }
     }
 
@@ -78,6 +95,7 @@ private struct ResultsSection: View {
     let report: MonteCarloReport
     let summary: String
     let markdown: String
+    let mode: ResultsMode
 
     var body: some View {
         VStack(spacing: 12) {
@@ -87,16 +105,38 @@ private struct ResultsSection: View {
                 ShareLink(item: markdown, subject: Text("Quotient results")) { Label("Share markdown", systemImage: "square.and.arrow.up") }
                     .font(.system(size: 12))
             }
-            ForEach(report.outcomes, id: \.name) { o in outcomeCard(o) }
-            Panel(title: "Paired differences (A − B), same seeds") {
-                ForEach(Array(report.comparisons.enumerated()), id: \.offset) { _, c in comparisonRow(c) }
+            if mode == .plain {
+                // Generated from the same StrategyOutcome / PairedComparison values
+                // the technical grid shows — see PlainEnglish.swift in QuotientCore.
+                Panel(title: "The short version") { PlainText(text: PlainEnglish.headline(report)) }
+                ForEach(report.outcomes, id: \.name) { o in plainCard(o) }
+            } else {
+                ForEach(report.outcomes, id: \.name) { o in outcomeCard(o) }
+                Panel(title: "Paired differences (A − B), same seeds") {
+                    ForEach(Array(report.comparisons.enumerated()), id: \.offset) { _, c in comparisonRow(c) }
+                }
             }
             Panel(title: "Final P&L distribution ($)") { pnlHistogram }
             Panel(title: "Markout at 50 steps by counterparty (ticks/lot)") { markoutChart }
+            if mode == .technical {
             Panel(title: "Reading this") {
                 Text("Negative markouts against informed counterparties are the empirical signature of adverse selection (Glosten–Milgrom). Lower RMS inventory and drawdown at similar spread capture is what Avellaneda–Stoikov's reservation-price skew buys. A paired p-value below 0.05 means the difference survived the trial-to-trial market noise; it says nothing about real-market profitability.")
                     .font(.system(size: 11)).foregroundStyle(Theme.inkMuted)
             }
+            }
+        }
+    }
+
+    private func plainCard(_ o: StrategyOutcome) -> some View {
+        Panel {
+            HStack {
+                Circle().fill(Theme.seriesColor(for: o.name)).frame(width: 8, height: 8)
+                Text(o.name).font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.ink)
+                Spacer()
+                Text(Fmt.money(o.finalPnL.mean)).font(Theme.mono(13, weight: .semibold)).foregroundStyle(Theme.pnlColor(o.finalPnL.mean))
+                Text("avg / session").font(.system(size: 10)).foregroundStyle(Theme.inkMuted)
+            }
+            PlainText(text: PlainEnglish.summary(of: o, in: report))
         }
     }
 
