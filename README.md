@@ -13,7 +13,19 @@ with significance tests. The algorithm lives in its own Swift package,
 assumptions. It is not a trading system, it is not a claim of real-market
 profitability, and it does not reproduce any firm's proprietary strategy.**
 
-![Terminal screen](docs/screenshots/terminal.png)
+<p align="center">
+  <img src="docs/screenshots/terminal.png" width="420" alt="Terminal: live SPY order book with the market maker's quotes highlighted in amber, P&L, inventory and fills">
+</p>
+<p align="center"><em>Terminal: a live simulated SPY book. The maker's bid and ask are the amber-marked levels; the fills, markout and inventory tiles update every step.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/compare.png" width="270" alt="Compare: paired Monte Carlo results in Plain English mode for the Trending scenario">
+  &nbsp;
+  <img src="docs/screenshots/pairs.png" width="270" alt="Pairs: KO/PEP z-score pairs trading with cumulative P&L and Monte Carlo verdict">
+  &nbsp;
+  <img src="docs/screenshots/market.png" width="270" alt="Market Context: the dated reference snapshot the simulation is calibrated from">
+</p>
+<p align="center"><em>Left: paired Monte Carlo on the Trending regime, explained in plain English (a Technical toggle shows the full stat grid). Centre: KO/PEP pairs trading with its random-walk negative control. Right: the dated market snapshot every number is calibrated from.</em></p>
 
 ## About this project
 
