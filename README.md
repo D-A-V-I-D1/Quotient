@@ -16,7 +16,7 @@ profitability, and it does not reproduce any firm's proprietary strategy.**
 <p align="center">
   <img src="docs/screenshots/terminal.png" width="420" alt="Terminal: live SPY order book with the market maker's quotes highlighted in amber, P&L, inventory and fills">
 </p>
-<p align="center"><em>Terminal: a live simulated SPY book. The maker's bid and ask are the amber-marked levels; the fills, markout and inventory tiles update every step.</em></p>
+<p align="center"><em>Terminal: a live simulated SPY book. The maker's bid and ask are the amber-marked levels; the fills, markout and inventory tiles update every step. Prices are simulated around SPY's real close of $771.35 on 2026-09-25 (the bundled snapshot), not a live feed.</em></p>
 
 <p align="center">
   <img src="docs/screenshots/compare.png" width="270" alt="Compare: paired Monte Carlo results in Plain English mode for the Trending scenario">
@@ -25,7 +25,7 @@ profitability, and it does not reproduce any firm's proprietary strategy.**
   &nbsp;
   <img src="docs/screenshots/market.png" width="270" alt="Market Context: the dated reference snapshot the simulation is calibrated from">
 </p>
-<p align="center"><em>Left: paired Monte Carlo on the Trending regime, explained in plain English (a Technical toggle shows the full stat grid). Centre: KO/PEP pairs trading with its random-walk negative control. Right: the dated market snapshot every number is calibrated from.</em></p>
+<p align="center"><em>Left: paired Monte Carlo on the Trending regime, explained in plain English (a Technical toggle shows the full stat grid). Centre: KO/PEP pairs trading with its random-walk negative control. Right: the dated market snapshot every number is calibrated from, researched 2026-09-28 and describing the 2026-09-25 close; the app flags it as stale after two weeks.</em></p>
 
 ## About this project
 
