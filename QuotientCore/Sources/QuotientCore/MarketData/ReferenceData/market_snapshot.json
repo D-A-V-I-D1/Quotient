@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "asOfDate": "2026-09-25",
+  "retrievedDate": "2026-09-28",
+  "notes": "Hand-researched reference values. Prices are Friday 2026-09-25 closes (the most recent full session when compiled on Monday 2026-09-28). Where sources disagreed the fetched page was preferred over search snippets; discrepancies were < 0.1%. SPY average daily volume conflicted across sources (31M vs ~91M shares); the lower fetched figure is kept and flagged. Typical spreads are characteristic values for these names, not exchange statistics. THIS DATA IS STATIC AND GOES STALE: see ReferenceData/README.md for how to refresh.",
+  "instruments": [
+    {
+      "symbol": "SPY",
+      "name": "SPDR S&P 500 ETF Trust",
+      "assetClass": "etf",
+      "lastPrice": 771.35,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 31100000,
+      "volatilityMultiplier": 1.0,
+      "sourceURL": "https://stockanalysis.com/etf/spy/",
+      "notes": "S&P 500 index closed 7,743.41 the same day (+0.51%, +13.1% YTD). ADV figure conflicts across sources; 50-90M is historically typical."
+    },
+    {
+      "symbol": "QQQ",
+      "name": "Invesco QQQ Trust (Nasdaq-100)",
+      "assetClass": "etf",
+      "lastPrice": 744.50,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 33600000,
+      "volatilityMultiplier": 1.25,
+      "sourceURL": "https://stockanalysis.com/etf/qqq/",
+      "notes": "Nasdaq-100 index closed 30,608.13 the same day."
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "assetClass": "stock",
+      "lastPrice": 341.07,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 20800000,
+      "volatilityMultiplier": 1.5,
+      "sourceURL": "https://stockanalysis.com/stocks/aapl/",
+      "notes": null
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corp.",
+      "assetClass": "stock",
+      "lastPrice": 516.17,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 2,
+      "averageDailyVolumeShares": 13100000,
+      "volatilityMultiplier": 1.4,
+      "sourceURL": "https://stockanalysis.com/stocks/msft/",
+      "notes": null
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corp.",
+      "assetClass": "stock",
+      "lastPrice": 225.07,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 115600000,
+      "volatilityMultiplier": 2.2,
+      "sourceURL": "https://stockanalysis.com/stocks/nvda/",
+      "notes": null
+    },
+    {
+      "symbol": "KO",
+      "name": "Coca-Cola Co.",
+      "assetClass": "stock",
+      "lastPrice": 87.81,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 8200000,
+      "volatilityMultiplier": 1.0,
+      "sourceURL": "https://stockanalysis.com/stocks/ko/",
+      "notes": null
+    },
+    {
+      "symbol": "PEP",
+      "name": "PepsiCo Inc.",
+      "assetClass": "stock",
+      "lastPrice": 128.63,
+      "priceAsOfDate": "2026-09-25",
+      "tickSize": 0.01,
+      "typicalSpreadTicks": 1,
+      "averageDailyVolumeShares": 4900000,
+      "volatilityMultiplier": 1.1,
+      "sourceURL": "https://stockanalysis.com/stocks/pep/",
+      "notes": "Near its 52-week low ($126.72; high $171.48): the KO/PEP ratio (~0.683) has widened notably in 2026."
+    }
+  ],
+  "volatility": {
+    "vixClose": 14.87,
+    "vixAsOfDate": "2026-09-25",
+    "vixOneMonthLow": 14.21,
+    "vixOneMonthHigh": 17.84,
+    "sourceURL": "https://www.investing.com/indices/volatility-s-p-500-historical-data"
+  },
+  "rates": {
+    "fedFundsLowerPercent": 3.75,
+    "fedFundsUpperPercent": 4.00,
+    "lastDecisionDate": "2026-09-16",
+    "lastDecision": "hike",
+    "lastDecisionBasisPoints": 25,
+    "nextMeetingDate": "2026-10-28",
+    "tenYearYieldPercent": 5.18,
+    "twoYearYieldPercent": 4.81,
+    "sourceURLs": [
+      "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
+      "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "https://stockmarketwatch.com/digest/2026-09-25"
+    ]
+  },
+  "headlines": [
+    {
+      "date": "2026-09-16",
+      "headline": "FOMC raised the target range 25 bp to 3.75-4.00% (12-0), the first hike since July 2023, citing elevated inflation; the dot plot implies one more hike in 2026.",
+      "sourceURL": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "10-year Treasury yield touched 5.23% intraday, its highest since 2007, as markets priced further tightening; closed near 5.18%.",
+      "sourceURL": "https://www.cnbc.com/2026/09/26/10-year-treasury-yield-is-at-its-highest-in-19-years-how-we-got-here.html"
+    },
+    {
+      "date": "2026-09-11",
+      "headline": "August CPI +0.4% m/m, +3.4% y/y, well above the 2% target ahead of the FOMC.",
+      "sourceURL": "https://www.bls.gov/news.release/cpi.nr0.htm"
+    },
+    {
+      "date": "2026-09-04",
+      "headline": "August payrolls +162k vs +53k consensus; unemployment 4.1%.",
+      "sourceURL": "https://www.cnbc.com/2026/09/04/jobs-report-august-2026.html"
+    },
+    {
+      "date": "2026-09-25",
+      "headline": "Equities shrugged off the bond selloff: S&P 500 +1.2% and Nasdaq +2.1% on the week, led by AI chipmakers; VIX closed 14.87.",
+      "sourceURL": "https://stockmarketwatch.com/digest/2026-09-25"
+    }
+  ],
+  "pairs": [
+    {
+      "symbolA": "KO",
+      "symbolB": "PEP",
+      "rationale": "Classic consumer-staples pair with a long history of co-movement; PEP's 2026 underperformance makes the spread a live mean-reversion question."
+    }
+  ],
+  "microstructure": {
+    "minimumTickUSD": 0.01,
+    "notes": "Reg NMS Rule 612 baseline tick is $0.01 for stocks >= $1. SEC amendments adopted 2024-09-18 introduce a $0.005 tick for tick-constrained names (time-weighted average quoted spread <= $0.015) with a compliance date of 2025-11-03 per law-firm summaries; live status was not independently verified on a 2026 SEC page when this snapshot was compiled. The simulator uses $0.01 throughout.",
+    "sourceURL": "https://www.sec.gov/newsroom/press-releases/2024-137"
+  }
+}

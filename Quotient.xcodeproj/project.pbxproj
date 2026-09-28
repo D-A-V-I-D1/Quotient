@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 110;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F2334E2306AF8C500DBE97D /* QuotientCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F2334E1306AF8C500DBE97D /* QuotientCore */; };
+		2F2334E4306AF8C500DBE97D /* QuotientCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2F2334E3306AF8C500DBE97D /* QuotientCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F2334BC306AF8C500DBE97D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F2334A6306AF8C300DBE97D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F2334AD306AF8C300DBE97D;
+			remoteInfo = Quotient;
+		};
+		2F2334C6306AF8C500DBE97D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F2334A6306AF8C300DBE97D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F2334AD306AF8C300DBE97D;
+			remoteInfo = Quotient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F2334AE306AF8C300DBE97D /* Quotient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F2334BB306AF8C500DBE97D /* QuotientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F2334C5306AF8C500DBE97D /* QuotientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuotientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2F2334B0306AF8C300DBE97D /* Quotient */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Quotient;
+			sourceTree = "<group>";
+		};
+		2F2334BE306AF8C500DBE97D /* QuotientTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuotientTests;
+			sourceTree = "<group>";
+		};
+		2F2334C8306AF8C500DBE97D /* QuotientUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = QuotientUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F2334AB306AF8C300DBE97D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				2F2334E2306AF8C500DBE97D /* QuotientCore in Frameworks */,
+			);
+		};
+		2F2334B8306AF8C500DBE97D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				2F2334E4306AF8C500DBE97D /* QuotientCore in Frameworks */,
+			);
+		};
+		2F2334C2306AF8C500DBE97D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F2334A5306AF8C300DBE97D = {
+			isa = PBXGroup;
+			children = (
+				2F2334B0306AF8C300DBE97D /* Quotient */,
+				2F2334BE306AF8C500DBE97D /* QuotientTests */,
+				2F2334C8306AF8C500DBE97D /* QuotientUITests */,
+				2F2334AF306AF8C300DBE97D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F2334AF306AF8C300DBE97D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F2334AE306AF8C300DBE97D /* Quotient.app */,
+				2F2334BB306AF8C500DBE97D /* QuotientTests.xctest */,
+				2F2334C5306AF8C500DBE97D /* QuotientUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F2334AD306AF8C300DBE97D /* Quotient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F2334CD306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "Quotient" */;
+			buildPhases = (
+				2F2334AA306AF8C300DBE97D /* Sources */,
+				2F2334AB306AF8C300DBE97D /* Frameworks */,
+				2F2334AC306AF8C300DBE97D /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				2F2334B0306AF8C300DBE97D /* Quotient */,
+			);
+			name = Quotient;
+			packageProductDependencies = (
+				2F2334E1306AF8C500DBE97D /* QuotientCore */,
+			);
+			productName = Quotient;
+			productReference = 2F2334AE306AF8C300DBE97D /* Quotient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F2334BA306AF8C500DBE97D /* QuotientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F2334D0306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "QuotientTests" */;
+			buildPhases = (
+				2F2334B7306AF8C500DBE97D /* Sources */,
+				2F2334B8306AF8C500DBE97D /* Frameworks */,
+				2F2334B9306AF8C500DBE97D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F2334BD306AF8C500DBE97D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2F2334BE306AF8C500DBE97D /* QuotientTests */,
+			);
+			name = QuotientTests;
+			packageProductDependencies = (
+				2F2334E3306AF8C500DBE97D /* QuotientCore */,
+			);
+			productName = QuotientTests;
+			productReference = 2F2334BB306AF8C500DBE97D /* QuotientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2F2334C4306AF8C500DBE97D /* QuotientUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F2334D3306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "QuotientUITests" */;
+			buildPhases = (
+				2F2334C1306AF8C500DBE97D /* Sources */,
+				2F2334C2306AF8C500DBE97D /* Frameworks */,
+				2F2334C3306AF8C500DBE97D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F2334C7306AF8C500DBE97D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2F2334C8306AF8C500DBE97D /* QuotientUITests */,
+			);
+			name = QuotientUITests;
+			productName = QuotientUITests;
+			productReference = 2F2334C5306AF8C500DBE97D /* QuotientUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F2334A6306AF8C300DBE97D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					2F2334AD306AF8C300DBE97D = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					2F2334BA306AF8C500DBE97D = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 2F2334AD306AF8C300DBE97D;
+					};
+					2F2334C4306AF8C500DBE97D = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 2F2334AD306AF8C300DBE97D;
+					};
+				};
+			};
+			buildConfigurationList = 2F2334A9306AF8C300DBE97D /* Build configuration list for PBXProject "Quotient" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F2334A5306AF8C300DBE97D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2F2334E0306AF8C500DBE97D /* XCLocalSwiftPackageReference "QuotientCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2F2334AF306AF8C300DBE97D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F2334AD306AF8C300DBE97D /* Quotient */,
+				2F2334BA306AF8C500DBE97D /* QuotientTests */,
+				2F2334C4306AF8C500DBE97D /* QuotientUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F2334AC306AF8C300DBE97D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		2F2334B9306AF8C500DBE97D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		2F2334C3306AF8C500DBE97D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F2334AA306AF8C300DBE97D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		2F2334B7306AF8C500DBE97D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		2F2334C1306AF8C500DBE97D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F2334BD306AF8C500DBE97D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F2334AD306AF8C300DBE97D /* Quotient */;
+			targetProxy = 2F2334BC306AF8C500DBE97D /* PBXContainerItemProxy */;
+		};
+		2F2334C7306AF8C500DBE97D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F2334AD306AF8C300DBE97D /* Quotient */;
+			targetProxy = 2F2334C6306AF8C500DBE97D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2F2334CB306AF8C500DBE97D /* Debug configuration for PBXProject "Quotient" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2F2334CC306AF8C500DBE97D /* Release configuration for PBXProject "Quotient" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F2334CE306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "Quotient" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HKKU57QZ7C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.Quotient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2F2334CF306AF8C500DBE97D /* Release configuration for PBXNativeTarget "Quotient" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HKKU57QZ7C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.Quotient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2F2334D1306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "QuotientTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.QuotientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quotient.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Quotient";
+			};
+			name = Debug;
+		};
+		2F2334D2306AF8C500DBE97D /* Release configuration for PBXNativeTarget "QuotientTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.QuotientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Quotient.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Quotient";
+			};
+			name = Release;
+		};
+		2F2334D4306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "QuotientUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.QuotientUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Quotient;
+			};
+			name = Debug;
+		};
+		2F2334D5306AF8C500DBE97D /* Release configuration for PBXNativeTarget "QuotientUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZTAU34GV2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Ayala.QuotientUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Quotient;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F2334A9306AF8C300DBE97D /* Build configuration list for PBXProject "Quotient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F2334CB306AF8C500DBE97D /* Debug configuration for PBXProject "Quotient" */,
+				2F2334CC306AF8C500DBE97D /* Release configuration for PBXProject "Quotient" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		2F2334CD306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "Quotient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F2334CE306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "Quotient" */,
+				2F2334CF306AF8C500DBE97D /* Release configuration for PBXNativeTarget "Quotient" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		2F2334D0306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "QuotientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F2334D1306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "QuotientTests" */,
+				2F2334D2306AF8C500DBE97D /* Release configuration for PBXNativeTarget "QuotientTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		2F2334D3306AF8C500DBE97D /* Build configuration list for PBXNativeTarget "QuotientUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F2334D4306AF8C500DBE97D /* Debug configuration for PBXNativeTarget "QuotientUITests" */,
+				2F2334D5306AF8C500DBE97D /* Release configuration for PBXNativeTarget "QuotientUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		2F2334E0306AF8C500DBE97D /* XCLocalSwiftPackageReference "QuotientCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = QuotientCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F2334E1306AF8C500DBE97D /* QuotientCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QuotientCore;
+		};
+		2F2334E3306AF8C500DBE97D /* QuotientCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = QuotientCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2F2334A6306AF8C300DBE97D /* Project object */;
+	validationLevel = 1;
+}
