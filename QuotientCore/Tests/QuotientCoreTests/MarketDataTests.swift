@@ -51,14 +51,16 @@ import Foundation
 
     @Test("calibration: VIX-implied per-step σ is in a sane range and scales with price")
     func calibration() throws {
-        // $100 stock, 16% annual vol, 1¢ tick, 0.1 s steps:
+        // $100 stock, 16% annual vol, 1¢ tick, 0.1 s steps, no dampening:
         // steps/yr = 252·23400/0.1 = 5.9e7 → σ_$ = 100·0.16/7679 ≈ 0.00208 → 0.21 ticks.
-        let s = Calibration.sigmaTicksPerStep(price: 100, annualisedVol: 0.16, tickSize: 0.01, secondsPerStep: 0.1)
-        #expect(abs(s - 0.208) < 0.005)
+        let raw = Calibration.sigmaTicksPerStep(price: 100, annualisedVol: 0.16, tickSize: 0.01, secondsPerStep: 0.1, dampening: 1)
+        #expect(abs(raw - 0.208) < 0.005)
+        let damped = Calibration.sigmaTicksPerStep(price: 100, annualisedVol: 0.16, tickSize: 0.01, secondsPerStep: 0.1)
+        #expect(abs(damped - 0.208 * Calibration.highFrequencyDampening) < 0.005)
         let p = try Calibration.parameters(from: Fixtures.snapshot, symbol: "TEST")
         #expect(p.instrument.symbol == "TEST")
         #expect(p.initialMidTicks == 10_000)
-        #expect(p.fundamentalVolatilityTicks > 0.1 && p.fundamentalVolatilityTicks < 5)
+        #expect(p.fundamentalVolatilityTicks > 0.05 && p.fundamentalVolatilityTicks < 5)
         #expect(p.crowdHalfSpreadTicks == 1)
         #expect(throws: MarketDataError.self) { try Calibration.parameters(from: Fixtures.snapshot, symbol: "NOPE") }
     }

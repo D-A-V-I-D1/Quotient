@@ -102,9 +102,21 @@ struct StatTile: View {
 }
 
 enum Fmt {
+    private static let grouped: NumberFormatter = {
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        f.roundingMode = .halfUp
+        f.usesGroupingSeparator = true
+        return f
+    }()
+
+    /// "+$1,234" / "−$2,607". Grouping separators match the plain-English prose.
     static func money(_ x: Double, decimals: Int = 0) -> String {
         let sign = x < 0 ? "−" : (x > 0 ? "+" : "")
-        return sign + "$" + String(format: "%.\(decimals)f", abs(x))
+        grouped.minimumFractionDigits = decimals
+        grouped.maximumFractionDigits = decimals
+        let body = grouped.string(from: NSNumber(value: abs(x))) ?? String(format: "%.\(decimals)f", abs(x))
+        return sign + "$" + body
     }
     static func price(_ x: Double) -> String { String(format: "%.2f", x) }
     static func num(_ x: Double, _ d: Int = 2) -> String { x.isFinite ? String(format: "%.\(d)f", x) : "–" }

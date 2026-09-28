@@ -15,6 +15,17 @@ public struct ScenarioPreset: Sendable, Identifiable, Equatable {
     public let summary: String
     public let parameters: SimulationParameters
 
+    /// Presets are defined relative to `SimulationParameters.example`'s σ.
+    /// Every knob that is a distance in ticks (drift, jump size, informed
+    /// threshold) is scaled by base.σ / referenceSigma so a "trending" or
+    /// "news heavy" regime means the same thing on a calibrated instrument
+    /// whose σ is 1.5 ticks as on the $100 example whose σ is 0.4.
+    /// WHY: without this, Trending on SPY drifted 0.06 ticks/step against a
+    /// σ of 1.49 — a trend smaller than the noise — and the preset silently
+    /// stopped meaning what its summary said.
+    public static let referenceSigma = SimulationParameters.example.fundamentalVolatilityTicks
+    static func scale(_ base: SimulationParameters) -> Double { base.fundamentalVolatilityTicks / referenceSigma }
+
     public static func all(base: SimulationParameters = .example) -> [ScenarioPreset] {
         [baseline(base), inventoryOnly(base), adverseSelection(base), trending(base), newsHeavy(base)]
     }
@@ -39,10 +50,11 @@ public struct ScenarioPreset: Sendable, Identifiable, Equatable {
     /// Heavy informed flow with a longer information delay.
     public static func adverseSelection(_ base: SimulationParameters = .example) -> ScenarioPreset {
         var p = base
+        let k = scale(base)
         p.informedFraction = 0.45
         p.informationDelaySteps = 15
         p.jumpProbability = 0.01
-        p.jumpSizeTicks = 10
+        p.jumpSizeTicks = 10 * k
         return ScenarioPreset(name: "Adverse Selection",
                               summary: "45% informed flow that sees the fundamental 15 steps early, larger news jumps (Glosten–Milgrom stress).",
                               parameters: p)
@@ -51,26 +63,28 @@ public struct ScenarioPreset: Sendable, Identifiable, Equatable {
     /// A trending session: the fundamental drifts and informed traders lean on it.
     public static func trending(_ base: SimulationParameters = .example) -> ScenarioPreset {
         var p = base
-        p.fundamentalDriftTicks = 0.06
+        let k = scale(base)
+        p.fundamentalDriftTicks = 0.06 * k
         p.informedFraction = 0.3
         // A longer information lag gives informed traders a real lead on the
-        // trend (≈ drift × delay = 2.4 ticks) instead of just noise.
+        // trend (≈ drift × delay = 2.4 ticks at reference σ) instead of just noise.
         p.informationDelaySteps = 40
-        p.informedThresholdTicks = 0.5
+        p.informedThresholdTicks = 0.5 * k
         return ScenarioPreset(name: "Trending",
-                              summary: "Fundamental drifts up ~\(Int(0.06 * Double(base.steps))) ticks over the session; 30% informed flow sees it 40 steps early. A maker that keeps selling into the trend gets run over.",
+                              summary: "Fundamental drifts up ~\(Int(0.06 * k * Double(base.steps))) ticks over the session; 30% informed flow sees it 40 steps early. A maker that keeps selling into the trend gets run over.",
                               parameters: p)
     }
 
     /// Frequent, large jumps.
     public static func newsHeavy(_ base: SimulationParameters = .example) -> ScenarioPreset {
         var p = base
+        let k = scale(base)
         p.jumpProbability = 0.02
-        p.jumpSizeTicks = 15
+        p.jumpSizeTicks = 15 * k
         p.informedFraction = 0.3
         p.informationDelaySteps = 12
         return ScenarioPreset(name: "News Heavy",
-                              summary: "Jumps every ~50 steps of ~15 ticks, 30% informed. Tests whether spreads widen with realised σ.",
+                              summary: "Jumps every ~50 steps of ~\(Int((15 * k).rounded())) ticks, 30% informed. Tests whether spreads widen with realised σ.",
                               parameters: p)
     }
 }

@@ -15,6 +15,30 @@ profitability, and it does not reproduce any firm's proprietary strategy.**
 
 ![Terminal screen](docs/screenshots/terminal.png)
 
+## About this project
+
+**Quotient was built with AI.** It began as an experiment: how far could a
+single, detailed brief taken by Anthropic's Claude Fable 5.1 get toward a
+production-quality market-making simulation, complete with tests, honest
+evaluation and documentation? The answer is this repository. The model wrote
+the code, the tests and the documentation from that brief, researched the
+theory and the market snapshot, and found and fixed the bugs listed below
+during development. The brief, the direction, the review, the product
+decisions, the app icon and the decision about what to ship are mine, and so
+is the responsibility for understanding every line of it.
+
+I'm **David De La Rosa**, a Computer Science undergraduate with a Mathematics
+minor and a software engineering intern working in iOS/Swift. I built this
+while preparing for quantitative trading and quant developer internship
+applications, and I use it as the thing I explain in interviews: the order
+book design, why Avellaneda-Stoikov skews quotes, what a markout measures,
+and why the naive strategy's higher average P&L is not the point.
+
+If you're evaluating this as a work sample, the honest framing is: I can
+defend every design decision in it, and I know exactly where the textbook
+model stops and the real problem begins. See
+[`docs/SUMMARY.md`](docs/SUMMARY.md) for that discussion.
+
 ## What's in the box
 
 | Layer | Where | What it does |
@@ -156,7 +180,12 @@ snapshot as stale after 14 days.
   evaluation changes.
 
 Calibration maps VIX × a per-instrument multiplier to per-step σ via
-√(steps per trading year). This is a stated approximation, not a fit.
+√(steps per trading year), then applies a documented high-frequency dampening
+factor (0.35), because √t scaling of implied vol badly overstates how much a
+tick-constrained mid actually moves in 100 ms. Both are stated approximations,
+not fits; the factor is a named constant in `Calibration.swift` and setting it
+to 1.0 shows the unadjusted case, in which every strategy is picked off in
+every regime.
 
 ## Known simplifications
 
@@ -196,5 +225,4 @@ QuotientCore/               the algorithm — its own Swift package, `swift test
 docs/RESEARCH.md            theory, interview framing, open-source landscape, with citations
 docs/RESULTS.md             generated Monte Carlo tables
 docs/SUMMARY.md             written summary and interview talking points
-ORIGINAL_PROMPT.md          the brief this was built from
 ```

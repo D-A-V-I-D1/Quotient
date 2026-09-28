@@ -51,7 +51,7 @@ import Foundation
         #expect(text.contains("less than half of what Bad gave up"))
         #expect(!text.contains("nan") && !text.contains("–$"))
         let head = PlainEnglish.headline(rep)
-        #expect(head.contains("Good did best both on average"))
+        #expect(head.contains("Good made the most on average") && head.contains("clear winner"))
     }
 
     @Test("mixed picture: lower mean but far lower variance reads as a trade-off with a win-rate caveat")
@@ -62,7 +62,7 @@ import Foundation
         let rep = report([wild, steady])
         let text = PlainEnglish.summary(of: steady, in: rep)
         #expect(text.contains("lost about \(PlainEnglish.money(abs(steady.finalPnL.mean))) per session"))
-        #expect(text.contains("made about \(PlainEnglish.money(steady.finalPnL.mean - wild.finalPnL.mean)) more per session"))
+        #expect(text.contains("lost about \(PlainEnglish.money(steady.finalPnL.mean - wild.finalPnL.mean)) less per session"))
         #expect(text.contains("far more consistent"))
         #expect(text.contains("less than half of what Fixed gave up"))
         // Steady loses in nearly every session; wild wins ~27% of the time by luck.
@@ -72,13 +72,30 @@ import Foundation
         #expect(!text.contains("nan"))
 
         let other = PlainEnglish.summary(of: wild, in: rep)
-        #expect(other.contains("made about \(PlainEnglish.money(steady.finalPnL.mean - wild.finalPnL.mean)) less per session"))
+        #expect(other.contains("lost about \(PlainEnglish.money(steady.finalPnL.mean - wild.finalPnL.mean)) more per session"))
         #expect(other.contains("less consistent") || other.contains("swung"))
         #expect(other.contains(", but ") == false || other.contains("more"))
 
         let head = PlainEnglish.headline(rep)
         #expect(head.contains("Every strategy lost money"))
-        #expect(head.contains("steadiest") || head.contains("clear winner"))
+        // Regression: with all-negative means the steadier strategy must be the
+        // one with the smaller sd, never the noisier loser that Sharpe favours.
+        #expect(head.contains("A-S lost the least on average"))
+        #expect(head.contains("clear winner"))
+        #expect(!head.contains("Fixed had the steadiest"))
+        #expect(!head.contains("made the most on average (−"))
+    }
+
+    @Test("headline: near-identical variability is a tie, and a heavy loser is called out")
+    func headlineTiesAndLosers() {
+        let a = outcome("A", pnls: series(mean: 60, sd: 30), dd: 10, rmsInv: 0.3, maxInv: 1, fills: 200)
+        let b = outcome("B", pnls: series(mean: 55, sd: 29), dd: 10, rmsInv: 0.3, maxInv: 1, fills: 200)
+        let loser = outcome("Naive", pnls: series(mean: -2200, sd: 1800), dd: 3000, rmsInv: 12, maxInv: 40, fills: 100)
+        let head = PlainEnglish.headline(report([loser, a, b]))
+        #expect(head.contains("about as steady"))
+        #expect(!head.contains("steadiest results from run to run (±"))
+        #expect(head.contains("Naive, by contrast, lost about"))
+        #expect(head.contains("finished positive in only"))
     }
 
     @Test("degenerate: zero fills produces a sensible sentence and never NaN")

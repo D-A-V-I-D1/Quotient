@@ -48,19 +48,33 @@ public enum PlainEnglish {
         let outcomes = report.outcomes.filter { $0.fillCount.mean > 0 }
         guard outcomes.count >= 2,
               let bestMean = outcomes.max(by: { $0.finalPnL.mean < $1.finalPnL.mean }),
-              let bestSharpe = outcomes.max(by: { $0.sessionSharpe.mean < $1.sessionSharpe.mean }) else {
+              // "Steadiest" = smallest run-to-run variation. Not Sharpe: when
+              // every strategy loses, mean/sd ranks the *noisier* loser higher
+              // (−172/288 beats −141/48), which reads as nonsense.
+              let steadiest = outcomes.min(by: { $0.finalPnL.standardDeviation < $1.finalPnL.standardDeviation }) else {
             return report.outcomes.isEmpty ? "No results yet." : "Not enough trading activity to compare strategies in this scenario."
         }
         let n = report.configuration.trials
+        let allLost = outcomes.allSatisfy { $0.finalPnL.mean < 0 }
+        let bestPhrase = bestMean.finalPnL.mean >= 0
+            ? "made the most on average (\(money(bestMean.finalPnL.mean)) per session)"
+            : "lost the least on average (\(money(bestMean.finalPnL.mean)) per session)"
+        // Treat near-identical variability as a tie rather than a distinction.
+        let tiedOnSteadiness = bestMean.finalPnL.standardDeviation <= steadiest.finalPnL.standardDeviation * aboutTheSameBand
         var s = "Across \(n) simulated sessions on identical markets, "
-        if bestMean.name == bestSharpe.name {
-            s += "\(bestMean.name) did best both on average (\(money(bestMean.finalPnL.mean)) per session) and on consistency, so it is the clear winner here."
+        if bestMean.name == steadiest.name {
+            s += "\(bestMean.name) \(bestPhrase) and also had the steadiest results from run to run, so it is the clear winner here."
+        } else if tiedOnSteadiness {
+            s += "\(bestMean.name) \(bestPhrase) and was about as steady from run to run as \(steadiest.name) (±\(money(bestMean.finalPnL.standardDeviation)) versus ±\(money(steadiest.finalPnL.standardDeviation)))."
         } else {
-            s += "\(bestMean.name) made the most on average (\(money(bestMean.finalPnL.mean)) per session), but \(bestSharpe.name) delivered the steadiest results relative to its swings. "
+            s += "\(bestMean.name) \(bestPhrase), but \(steadiest.name) had the steadiest results from run to run (±\(money(steadiest.finalPnL.standardDeviation)) versus ±\(money(bestMean.finalPnL.standardDeviation))). "
             s += "When results this variable are involved, the steadier strategy is usually the one a trading desk would actually run."
         }
-        if outcomes.allSatisfy({ $0.finalPnL.mean < 0 }) {
+        if allLost {
             s += " Every strategy lost money in this scenario; the comparison is about who lost least and most predictably."
+        } else if let worst = outcomes.min(by: { $0.finalPnL.mean < $1.finalPnL.mean }),
+                  worst.finalPnL.mean < 0, bestMean.finalPnL.mean > 0, worst.name != bestMean.name {
+            s += " \(worst.name), by contrast, lost about \(money(abs(worst.finalPnL.mean))) per session and finished positive in only \(percent(worst.winRate)) of sessions."
         }
         return s
     }
@@ -121,6 +135,10 @@ public enum PlainEnglish {
         var s = "Compared with \(ref.name), it "
         if abs(dPnL) < 1 {
             s += "made about the same on average"
+        } else if o.finalPnL.mean < 0 && ref.finalPnL.mean < 0 {
+            // Both lost: "lost $31 more" reads better than "made $31 less".
+            s += "lost about \(money(abs(dPnL))) \(dPnL > 0 ? "less" : "more") per session"
+            s += " (\(significanceClause(p)))"
         } else {
             s += "made about \(money(abs(dPnL))) \(dPnL > 0 ? "more" : "less") per session"
             s += " (\(significanceClause(p)))"
