@@ -85,10 +85,15 @@ struct StatTile: View {
     var color: Color = Theme.ink
     var footnote: String? = nil
     var body: some View {
+        // Every row has a fixed height so a tile never changes size when its
+        // value or footnote changes; a resizing tile re-flows the whole screen.
         VStack(alignment: .leading, spacing: 3) {
             Text(label.uppercased()).font(.system(size: 10, weight: .semibold)).tracking(1).foregroundStyle(Theme.inkMuted)
-            Text(value).font(Theme.mono(17, weight: .semibold)).foregroundStyle(color).lineLimit(1).minimumScaleFactor(0.6)
-            if let footnote { Text(footnote).font(.system(size: 10)).foregroundStyle(Theme.inkMuted) }
+                .lineLimit(1).frame(height: 12, alignment: .leading)
+            Text(value).font(Theme.mono(17, weight: .semibold)).monospacedDigit().foregroundStyle(color)
+                .lineLimit(1).minimumScaleFactor(0.6).frame(height: 22, alignment: .leading)
+            Text(footnote ?? " ").font(.system(size: 10)).monospacedDigit().foregroundStyle(Theme.inkMuted)
+                .lineLimit(1).frame(height: 12, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(10)

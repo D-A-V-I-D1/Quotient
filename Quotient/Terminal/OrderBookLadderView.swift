@@ -18,15 +18,32 @@ struct OrderBookLadderView: View {
     let midTicks: Double
     let spreadTicks: Ticks
 
+    /// Rows drawn per side. Always this many, padding with blanks.
+    /// WHY: if the row count followed the live depth, the ladder's height
+    /// would change every tick and everything below it would jump.
+    let rowsPerSide = 6
+    private let rowHeight: CGFloat = 20
+
     private var maxQty: Int { max(1, (bids + asks).map(\.quantity).max() ?? 1) }
 
     var body: some View {
         VStack(spacing: 2) {
             header
-            ForEach(asks.reversed()) { lvl in row(lvl, side: .ask) }
+            ForEach(0..<rowsPerSide, id: \.self) { i in
+                // Asks: deepest at the top, best just above the spread row.
+                let idx = rowsPerSide - 1 - i
+                if idx < asks.count { row(asks[idx], side: .ask) } else { blankRow }
+            }
             spreadRow
-            ForEach(bids) { lvl in row(lvl, side: .bid) }
+            ForEach(0..<rowsPerSide, id: \.self) { i in
+                if i < bids.count { row(bids[i], side: .bid) } else { blankRow }
+            }
         }
+        .transaction { $0.animation = nil }
+    }
+
+    private var blankRow: some View {
+        Color.clear.frame(height: rowHeight)
     }
 
     private var header: some View {
@@ -47,7 +64,8 @@ struct OrderBookLadderView: View {
             Text("spread \(spreadTicks)t · \(Fmt.price(Double(spreadTicks) * instrument.tickSize))")
         }
         .font(Theme.mono(11)).foregroundStyle(Theme.amber)
-        .padding(.horizontal, 6).padding(.vertical, 4)
+        .padding(.horizontal, 6)
+        .frame(height: 22)
         .background(Theme.amber.opacity(0.08))
     }
 
@@ -80,7 +98,8 @@ struct OrderBookLadderView: View {
             }
             .font(.system(size: 10)).frame(width: 28)
         }
-        .padding(.horizontal, 6).padding(.vertical, 2)
+        .padding(.horizontal, 6)
+        .frame(height: rowHeight)
         .background(isMaker ? Theme.amber.opacity(0.06) : Color.clear)
     }
 }

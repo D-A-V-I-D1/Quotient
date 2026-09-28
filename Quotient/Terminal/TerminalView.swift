@@ -24,6 +24,18 @@ struct TerminalView: View {
             .navigationTitle("Quotient")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Theme.background, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 8) {
+                        Image("Quotient-icon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 22)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                        Text("Quotient").font(.system(size: 17, weight: .semibold)).foregroundStyle(Theme.ink)
+                    }
+                }
+            }
         }
         // Rebuild when the snapshot finishes loading or the instrument changes.
         // The id must include snapshot presence: the view appears before the
@@ -66,6 +78,24 @@ private struct TerminalContent: View {
             .padding(12)
         }
         .scrollIndicators(.hidden)
+        // The simulator updates ~20×/s; implicit animations on any of this
+        // content would fight the scroll view and make it judder.
+        .transaction { $0.animation = nil }
+    }
+
+    /// Fixed-width trailing axis so the plot area does not shift as label
+    /// widths change (e.g. "$0" → "−$1,250").
+    private func fixedAxis() -> some AxisContent {
+        AxisMarks(position: .trailing, values: .automatic(desiredCount: 3)) { value in
+            AxisGridLine().foregroundStyle(Theme.hairline)
+            AxisValueLabel {
+                if let d = value.as(Double.self) {
+                    Text(d, format: .number.precision(.fractionLength(0)))
+                        .font(Theme.mono(9)).monospacedDigit().foregroundStyle(Theme.inkMuted)
+                        .frame(width: 44, alignment: .trailing)
+                }
+            }
+        }
     }
 
     // MARK: Pieces
@@ -75,14 +105,15 @@ private struct TerminalContent: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 8) {
                     Text(vm.instrument.symbol).font(Theme.mono(20, weight: .bold)).foregroundStyle(Theme.amber)
-                    Text(vm.dollars(vm.state.midTicks)).font(Theme.mono(20, weight: .semibold)).foregroundStyle(Theme.ink)
+                    Text(vm.dollars(vm.state.midTicks)).font(Theme.mono(20, weight: .semibold)).monospacedDigit().foregroundStyle(Theme.ink)
                 }
                 Text("\(vm.instrument.name) · \(vm.preset.name) · seed \(vm.seed)")
                     .font(.system(size: 11)).foregroundStyle(Theme.inkMuted)
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
-                Text("step \(vm.simulator.step)/\(vm.parameters.steps)").font(Theme.mono(11)).foregroundStyle(Theme.inkSecondary)
+                Text("step \(vm.simulator.step)/\(vm.parameters.steps)").font(Theme.mono(11)).monospacedDigit().foregroundStyle(Theme.inkSecondary)
+                    .frame(width: 130, alignment: .trailing)
                 ProgressView(value: vm.progress).tint(Theme.amber).frame(width: 90)
             }
         }
@@ -109,13 +140,13 @@ private struct TerminalContent: View {
     private var makerQuoteLine: some View {
         HStack {
             Label {
-                Text(vm.makerQuotes.bid.map(vm.dollars) ?? "—").font(Theme.mono(12))
+                Text(vm.makerQuotes.bid.map(vm.dollars) ?? "—").font(Theme.mono(12)).monospacedDigit().frame(width: 60, alignment: .leading)
             } icon: { Circle().fill(Theme.bid).frame(width: 6, height: 6) }
             Text("my bid").font(.system(size: 10)).foregroundStyle(Theme.inkMuted)
             Spacer()
             Text("my ask").font(.system(size: 10)).foregroundStyle(Theme.inkMuted)
             Label {
-                Text(vm.makerQuotes.ask.map(vm.dollars) ?? "—").font(Theme.mono(12))
+                Text(vm.makerQuotes.ask.map(vm.dollars) ?? "—").font(Theme.mono(12)).monospacedDigit().frame(width: 60, alignment: .trailing)
             } icon: { Circle().fill(Theme.ask).frame(width: 6, height: 6) }
         }
         .foregroundStyle(Theme.ink)
@@ -150,7 +181,7 @@ private struct TerminalContent: View {
                     RuleMark(y: .value("Zero", 0)).foregroundStyle(Theme.inkMuted.opacity(0.5)).lineStyle(.init(lineWidth: 1, dash: [3, 3]))
                 }
                 .chartXAxis(.hidden)
-                .chartYAxis { AxisMarks(position: .trailing) { AxisGridLine().foregroundStyle(Theme.hairline); AxisValueLabel().font(Theme.mono(9)).foregroundStyle(Theme.inkMuted) } }
+                .chartYAxis { fixedAxis() }
                 .frame(height: 110)
             }
             Panel(title: "Inventory (lots)") {
@@ -161,7 +192,7 @@ private struct TerminalContent: View {
                     RuleMark(y: .value("Flat", 0)).foregroundStyle(Theme.inkMuted.opacity(0.5)).lineStyle(.init(lineWidth: 1, dash: [3, 3]))
                 }
                 .chartXAxis(.hidden)
-                .chartYAxis { AxisMarks(position: .trailing) { AxisGridLine().foregroundStyle(Theme.hairline); AxisValueLabel().font(Theme.mono(9)).foregroundStyle(Theme.inkMuted) } }
+                .chartYAxis { fixedAxis() }
                 .frame(height: 90)
             }
         }
@@ -224,22 +255,35 @@ private struct TerminalContent: View {
         .font(.system(size: 13)).foregroundStyle(Theme.ink)
     }
 
+    private let fillRows = 8
+
     private var fillsTape: some View {
         Panel(title: "Fills") {
-            if vm.recentFills.isEmpty {
-                Text("No fills yet.").font(.system(size: 12)).foregroundStyle(Theme.inkMuted)
-            }
-            ForEach(Array(vm.recentFills.enumerated()), id: \.offset) { _, f in
-                HStack {
-                    Text(f.side == .bid ? "BUY" : "SELL").font(Theme.mono(11, weight: .bold))
-                        .foregroundStyle(f.side == .bid ? Theme.bid : Theme.ask).frame(width: 36, alignment: .leading)
-                    Text("\(f.quantity) @ \(vm.dollars(f.price))").font(Theme.mono(12)).foregroundStyle(Theme.ink)
-                    Spacer()
-                    Text(counterpartyLabel(f.counterparty)).font(.system(size: 10)).foregroundStyle(f.counterparty == .informedTrader ? Theme.amber : Theme.inkMuted)
-                    Text("t=\(f.step)").font(Theme.mono(10)).foregroundStyle(Theme.inkMuted).frame(width: 56, alignment: .trailing)
+            // Always `fillRows` rows so the panel height is constant.
+            ForEach(0..<fillRows, id: \.self) { i in
+                if i < vm.recentFills.count {
+                    fillRow(vm.recentFills[i])
+                } else {
+                    HStack {
+                        if i == 0 { Text("No fills yet.").font(.system(size: 12)).foregroundStyle(Theme.inkMuted) }
+                        Spacer()
+                    }
+                    .frame(height: 18)
                 }
             }
         }
+    }
+
+    private func fillRow(_ f: MarketMakerFill) -> some View {
+        HStack {
+            Text(f.side == .bid ? "BUY" : "SELL").font(Theme.mono(11, weight: .bold))
+                .foregroundStyle(f.side == .bid ? Theme.bid : Theme.ask).frame(width: 36, alignment: .leading)
+            Text("\(f.quantity) @ \(vm.dollars(f.price))").font(Theme.mono(12)).monospacedDigit().foregroundStyle(Theme.ink)
+            Spacer()
+            Text(counterpartyLabel(f.counterparty)).font(.system(size: 10)).foregroundStyle(f.counterparty == .informedTrader ? Theme.amber : Theme.inkMuted)
+            Text("t=\(f.step)").font(Theme.mono(10)).monospacedDigit().foregroundStyle(Theme.inkMuted).frame(width: 56, alignment: .trailing)
+        }
+        .frame(height: 18)
     }
 
     private func counterpartyLabel(_ p: Participant) -> String {
